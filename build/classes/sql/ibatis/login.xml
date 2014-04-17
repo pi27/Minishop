@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap
+
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+    
+
+<sqlMap namespace="login">
+
+	<typeAlias alias="loginVo"       type="com.minishop.login.domain.LoginVo" />
+
+	<select id="loginCheck" parameterClass="loginVo" resultClass="loginVo" >
+
+		SELECT	ID, PASSWD
+		FROM	TB_USER
+		WHERE	ID = #id#
+		AND		PASSWD = #passwd#
+
+	</select>
+
+	<select id="getUser" parameterClass="String" resultClass="loginVo" >
+
+		SELECT id, passwd FROM TB_USER
+		WHERE  id = #id#
+
+	</select>
+	
+	<select id="idCheck" parameterClass="String" resultClass="int" >
+
+		SELECT	COUNT(*)
+		FROM	TB_USER
+		WHERE	ID = #id#
+
+	</select>
+	
+	<insert id="insertUser" parameterClass="loginVo" >
+
+		INSERT INTO TB_USER
+		VALUES(#id#, #passwd#, #birth#, #gender#, #email#, #phone#, #addr#, TO_CHAR(SYSDATE, 'YYYYMMDD'), NULL)
+
+	</insert>
+</sqlMap> 
